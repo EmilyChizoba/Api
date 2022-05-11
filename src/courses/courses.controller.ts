@@ -1,13 +1,15 @@
-import { Body, Controller, Get, Post} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res} from '@nestjs/common';
+import { response } from 'express';
 
 @Controller('courses')
 export class CoursesController {
     @Get()
-    findAll() { 
-        return 'Listagem de cursos';
+    findAll(@Res() response) { 
+        return response.status(200).send('Listagem de cursos');
     }
 
     @Post()
+    @HttpCode(HttpStatus.NO_CONTENT)
     create(@Body("name") body){
         return body;
     }
